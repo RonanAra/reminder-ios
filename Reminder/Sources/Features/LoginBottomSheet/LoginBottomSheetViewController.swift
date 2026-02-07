@@ -10,12 +10,16 @@ import Foundation
 
 class LoginBottomSheetViewController: UIViewController {
     var mainNavigation: UINavigationController?
-    private let loginView = LoginBottomSheetView()
+    private let contentView: LoginBottomSheetView
     private let loginViewModel = LoginBottomSheetViewModel()
     public weak var flowDelegate: LoginBottomSheetFlowDelegate?
     private let bottomSheetHeight: CGFloat = 50.0
     
-    init(flowDelegate: LoginBottomSheetFlowDelegate) {
+    init(
+        contentView: LoginBottomSheetView,
+        flowDelegate: LoginBottomSheetFlowDelegate
+    ) {
+        self.contentView = contentView
         self.flowDelegate = flowDelegate
         super.init(nibName: nil, bundle: nil)
     }
@@ -27,14 +31,14 @@ class LoginBottomSheetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loginView.delegate = self
+        contentView.delegate = self
         setup()
         bindViewModel()
     }
     
     private func setup() {
-        self.view.addSubview(loginView)
-        loginView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(contentView)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         
         setupGesture()
         setupConstraints()
@@ -56,9 +60,9 @@ class LoginBottomSheetViewController: UIViewController {
     
     func animateShow(onCompletion: (() -> Void)? = nil) {
         self.view.layoutIfNeeded()
-        loginView.transform = CGAffineTransform(translationX: 0, y: loginView.frame.height)
+        contentView.transform = CGAffineTransform(translationX: 0, y: contentView.frame.height)
         UIView.animate(withDuration: 0, animations: {
-            self.loginView.transform = .identity
+            self.contentView.transform = .identity
             self.view.layoutIfNeeded()
             
         }) { _ in
@@ -68,12 +72,12 @@ class LoginBottomSheetViewController: UIViewController {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            loginView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            loginView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            loginView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            contentView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            contentView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
         ])
         
-        let heightConstraint = loginView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.5).isActive = true
+        let heightConstraint = contentView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.5).isActive = true
     }
     
 }

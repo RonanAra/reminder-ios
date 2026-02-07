@@ -11,9 +11,9 @@ import UIKit
 class SplashViewController: UIViewController {
     
     let contentView = SplashView()
-    public weak var flowDelegate: ReminderFlowController?
+    public weak var flowDelegate: SplashFlowDelegate?
     
-    init(flowDelegate: ReminderFlowController?) {
+    init(flowDelegate: SplashFlowDelegate?) {
         self.flowDelegate = flowDelegate
         super.init(nibName: nil, bundle: nil)
     }
