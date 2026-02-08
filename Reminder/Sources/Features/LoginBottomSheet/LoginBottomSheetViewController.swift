@@ -11,15 +11,17 @@ import Foundation
 class LoginBottomSheetViewController: UIViewController {
     var mainNavigation: UINavigationController?
     private let contentView: LoginBottomSheetView
-    private let loginViewModel = LoginBottomSheetViewModel()
+    private let loginViewModel: LoginBottomSheetViewModel
     public weak var flowDelegate: LoginBottomSheetFlowDelegate?
     private let bottomSheetHeight: CGFloat = 50.0
     
     init(
         contentView: LoginBottomSheetView,
+        viewModel: LoginBottomSheetViewModel,
         flowDelegate: LoginBottomSheetFlowDelegate
     ) {
         self.contentView = contentView
+        self.loginViewModel = viewModel
         self.flowDelegate = flowDelegate
         super.init(nibName: nil, bundle: nil)
     }

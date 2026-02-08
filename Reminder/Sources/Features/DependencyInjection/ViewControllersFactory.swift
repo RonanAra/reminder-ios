@@ -11,14 +11,22 @@ import UIKit
 final class ViewControllersFactory: ViewControllersFactoryProtocol {
     
     func makeSplashViewController(flowDelegate: SplashFlowDelegate) -> SplashViewController {
-        let viewController = SplashViewController(flowDelegate: flowDelegate)
+        let contentView = SplashView()
+        let viewController = SplashViewController(
+            contentView: contentView,
+            flowDelegate: flowDelegate
+        )
         return viewController
     }
     
-    func makeLoginBottomSheetViewController(flowDelegate: LoginBottomSheetFlowDelegate) -> LoginBottomSheetViewController {
+    func makeLoginBottomSheetViewController(
+        viewModel: LoginBottomSheetViewModel,
+        flowDelegate: LoginBottomSheetFlowDelegate
+    ) -> LoginBottomSheetViewController {
         let contentView = LoginBottomSheetView()
         let viewController = LoginBottomSheetViewController(
             contentView: contentView,
+            viewModel: viewModel,
             flowDelegate: flowDelegate
         )
         return viewController
