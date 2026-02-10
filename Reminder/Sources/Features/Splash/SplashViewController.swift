@@ -30,6 +30,15 @@ class SplashViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
+        startBreathingAnimation()
+    }
+    
+    private func verifyUserIsLogged() {
+        if let user = UserDefaultsManager.getUser(), user.isSavedUser {
+            flowDelegate?.navigateToHome()
+        } else {
+            showLoginBottomSheet()
+        }
     }
     
     private func setup() {
@@ -57,6 +66,34 @@ class SplashViewController: UIViewController {
     
     @objc
     private func showLoginBottomSheet() {
+        animateLogo()
         flowDelegate?.openLoginBottomSheet()
+    }
+}
+
+// MARK: Animations
+extension SplashViewController {
+    private func startBreathingAnimation() {
+        UIView.animate(
+            withDuration: 1.5,
+            delay: 0.0,
+            animations: {
+                self.contentView.logoImageView.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+            },
+            completion: { _ in
+                self.verifyUserIsLogged()
+            }
+        )
+    }
+    
+    private func animateLogo() {
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0.0,
+            options: [.curveEaseOut],
+            animations: {
+                self.contentView.logoImageView.transform = self.contentView.logoImageView.transform.translatedBy(x: 0, y: -100)
+            }
+        )
     }
 }
