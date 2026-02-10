@@ -13,4 +13,5 @@ protocol ViewControllersFactoryProtocol: AnyObject {
         viewModel: LoginBottomSheetViewModel,
         flowDelegate: LoginBottomSheetFlowDelegate
     ) -> LoginBottomSheetViewController
+    func makeHomeViewController(flowDelegate: HomeFlowDelegate) -> HomeViewController
 }
