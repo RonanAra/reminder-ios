@@ -32,7 +32,7 @@ class HomeViewController: UIViewController {
     }
     
     private func setupBindView() {
-        self.view = contentView
+        self.view.addSubview(contentView)
         setupContentViewToBounds(contentView: contentView)
     }
 }

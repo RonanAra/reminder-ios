@@ -33,14 +33,13 @@ class ReminderFlowController {
 extension ReminderFlowController: LoginBottomSheetFlowDelegate {
     func navigateToHome() {
         self.navigationController?.dismiss(animated: false)
-        let viewController = UIViewController()
-        viewController.view.backgroundColor = .blue
+        let viewController = viewControllerFactory.makeHomeViewController(flowDelegate: self)
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
 //MARK: - Splash
-extension ReminderFlowController: SplashFlowDelegate {
+extension ReminderFlowController: SplashFlowDelegate, HomeFlowDelegate {
     func openLoginBottomSheet() {
         let loginBottomSheet = viewControllerFactory.makeLoginBottomSheetViewController(
             viewModel: viewModelFactory.makeLoginBottomSheetViewModel(),
@@ -55,8 +54,7 @@ extension ReminderFlowController: SplashFlowDelegate {
         
         func navigateToHome() {
             self.navigationController?.dismiss(animated: false)
-            let viewController = UIViewController()
-            viewController.view.backgroundColor = .blue
+            let viewController = viewControllerFactory.makeHomeViewController(flowDelegate: self)
             self.navigationController?.pushViewController(viewController, animated: true)
         }
     }
