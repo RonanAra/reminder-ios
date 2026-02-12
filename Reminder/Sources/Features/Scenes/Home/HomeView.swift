@@ -107,7 +107,7 @@ class HomeView: UIView {
             contentBackground.topAnchor.constraint(equalTo: profileBackground.bottomAnchor),
             contentBackground.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            feedbackButton.bottomAnchor.constraint(equalTo: contentBackground.bottomAnchor, constant: -Metrics.medium),
+            feedbackButton.bottomAnchor.constraint(equalTo: contentBackground.bottomAnchor, constant: -Metrics.large),
             feedbackButton.leadingAnchor.constraint(equalTo: contentBackground.leadingAnchor, constant: Metrics.medium),
             feedbackButton.trailingAnchor.constraint(equalTo: contentBackground.trailingAnchor, constant: -Metrics.medium),
             feedbackButton.heightAnchor.constraint(equalToConstant: Metrics.buttonSize),

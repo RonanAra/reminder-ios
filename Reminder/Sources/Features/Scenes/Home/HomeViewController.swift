@@ -29,10 +29,31 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBindView()
+        setupNavigationBar()
+    }
+    
+    private func setupNavigationBar() {
+        navigationController?.navigationBar.isHidden = false
+        navigationItem.hidesBackButton = true
+        
+        let logoutButton = UIBarButtonItem(
+            image: UIImage(named: "logoutIcon"),
+            style: .plain,
+            target: self,
+            action: #selector(logoutAction)
+        )
+        logoutButton.tintColor = Colors.primaryRedBase
+        
+        navigationItem.rightBarButtonItem = logoutButton
     }
     
     private func setupBindView() {
         self.view.addSubview(contentView)
         setupContentViewToBounds(contentView: contentView)
+    }
+    
+    @objc
+    private func logoutAction() {
+        // not impl yet
     }
 }
