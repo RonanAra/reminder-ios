@@ -9,5 +9,6 @@ import Foundation
 import UIKit
 
 protocol HomeFlowDelegate: AnyObject {
-    
+    func navigateToReceipes()
+    func logout()
 }

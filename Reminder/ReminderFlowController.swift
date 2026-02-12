@@ -39,7 +39,7 @@ extension ReminderFlowController: LoginBottomSheetFlowDelegate {
 }
 
 //MARK: - Splash
-extension ReminderFlowController: SplashFlowDelegate, HomeFlowDelegate {
+extension ReminderFlowController: SplashFlowDelegate {
     func openLoginBottomSheet() {
         let loginBottomSheet = viewControllerFactory.makeLoginBottomSheetViewController(
             viewModel: viewModelFactory.makeLoginBottomSheetViewModel(),
@@ -57,5 +57,17 @@ extension ReminderFlowController: SplashFlowDelegate, HomeFlowDelegate {
             let viewController = viewControllerFactory.makeHomeViewController(flowDelegate: self)
             self.navigationController?.pushViewController(viewController, animated: true)
         }
+    }
+}
+
+//MARK: - Home
+extension ReminderFlowController: HomeFlowDelegate {
+    func navigateToReceipes() {
+        // not impl yet
+    }
+    
+    func logout() {
+        self.navigationController?.popViewController(animated: true)
+        self.openLoginBottomSheet()
     }
 }
