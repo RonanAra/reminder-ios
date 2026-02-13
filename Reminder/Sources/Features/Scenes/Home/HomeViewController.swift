@@ -49,6 +49,7 @@ class HomeViewController: UIViewController {
     
     private func setupBindView() {
         self.view.addSubview(contentView)
+        self.view.backgroundColor = Colors.gray600
         setupContentViewToBounds(contentView: contentView)
     }
     

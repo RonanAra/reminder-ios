@@ -44,6 +44,7 @@ class SplashViewController: UIViewController {
     private func setup() {
         self.view.addSubview(contentView)
         self.navigationController?.navigationBar.isHidden = true
+        self.view.backgroundColor = Colors.primaryRedBase
         setupContentViewToBounds(contentView: contentView)
         setupGesture()
     }

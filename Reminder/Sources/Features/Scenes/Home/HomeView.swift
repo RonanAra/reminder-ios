@@ -28,8 +28,10 @@ class HomeView: UIView {
     
     private let profileImage: UIImageView = {
         let view = UIImageView()
-        view.layer.cornerRadius = Metrics.huge
+        view.layer.cornerRadius = Metrics.medium
+        view.isUserInteractionEnabled = true
         view.clipsToBounds = true
+        view.image = UIImage(named: "user")
         view.contentMode = .scaleAspectFit
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -82,6 +84,18 @@ class HomeView: UIView {
         contentBackground.addSubview(feedbackButton)
         
         setupConstraints()
+        setupImageGesture()
+    }
+    
+    private func setupImageGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
+        
+        profileImage.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc
+    private func profileImageTapped() {
+        print("Image was clicked")
     }
     
     private func setupConstraints() {
@@ -91,7 +105,7 @@ class HomeView: UIView {
             profileBackground.topAnchor.constraint(equalTo: topAnchor),
             profileBackground.heightAnchor.constraint(equalToConstant: Metrics.backgroundProfileSize),
             
-            profileImage.topAnchor.constraint(equalTo: profileBackground.topAnchor, constant: Metrics.huge),
+            profileImage.topAnchor.constraint(equalTo: profileBackground.topAnchor, constant: Metrics.large),
             profileImage.leadingAnchor.constraint(equalTo: profileBackground.leadingAnchor, constant: Metrics.medium),
             profileImage.heightAnchor.constraint(equalToConstant: Metrics.profileImageSize),
             profileImage.widthAnchor.constraint(equalToConstant: Metrics.profileImageSize),
