@@ -10,6 +10,8 @@ import Foundation
 
 class HomeView: UIView {
     
+    public weak var delegate: HomeViewDelegate?
+    
     private let profileBackground: UIView = {
         let view = UIView()
         view.backgroundColor = Colors.gray600
@@ -26,7 +28,7 @@ class HomeView: UIView {
         return view
     }()
     
-    private let profileImage: UIImageView = {
+    let profileImage: UIImageView = {
         let view = UIImageView()
         view.layer.cornerRadius = Metrics.medium
         view.isUserInteractionEnabled = true
@@ -95,7 +97,7 @@ class HomeView: UIView {
     
     @objc
     private func profileImageTapped() {
-        print("Image was clicked")
+        delegate?.didTapProfileImage()
     }
     
     private func setupConstraints() {
