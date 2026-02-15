@@ -6,8 +6,14 @@
 //
 
 final class ViewModelsFactory: ViewModelsFactoryProtocol {
+    func makeHomeViewModel() -> HomeViewModel {
+       let viewModel = HomeViewModel()
+       return viewModel
+    }
+    
     func makeLoginBottomSheetViewModel() -> LoginBottomSheetViewModel {
         let viewModel = LoginBottomSheetViewModel()
         return viewModel
     }
+    
 }

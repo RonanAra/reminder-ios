@@ -12,13 +12,16 @@ class HomeViewController: UIViewController {
     
     public weak var flowDelegate: HomeFlowDelegate?
     private var contentView: HomeView
+    private var viewModel: HomeViewModel?
     
     init(
         contentView: HomeView,
+        viewModel: HomeViewModel,
         flowDelegate: HomeFlowDelegate
     ) {
         self.contentView = contentView
         self.flowDelegate = flowDelegate
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -30,6 +33,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         setupBindView()
         setupNavigationBar()
+        checkIfExistingData()
     }
     
     private func setupNavigationBar() {
@@ -52,6 +56,12 @@ class HomeViewController: UIViewController {
         self.view.addSubview(contentView)
         self.view.backgroundColor = Colors.gray600
         setupContentViewToBounds(contentView: contentView)
+    }
+    
+    private func checkIfExistingData() {
+        if let user = UserDefaultsManager.getUser() {
+            contentView.nameTextField.text = UserDefaultsManager.getUserName()
+        }
     }
     
     @objc

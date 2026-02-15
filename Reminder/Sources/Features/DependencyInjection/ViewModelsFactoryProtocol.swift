@@ -9,4 +9,5 @@ import Foundation
 
 protocol ViewModelsFactoryProtocol: AnyObject {
     func makeLoginBottomSheetViewModel() -> LoginBottomSheetViewModel
+    func makeHomeViewModel() -> HomeViewModel
 }

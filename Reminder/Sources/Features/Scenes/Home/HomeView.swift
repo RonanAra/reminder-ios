@@ -47,11 +47,13 @@ class HomeView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    private let nameLabel: UILabel = {
-        let view = UILabel()
-        view.text = "Ronan Fernandes"
+    
+    let nameTextField: UITextField = {
+        let view = UITextField()
+        view.placeholder = "Insira seu nome"
         view.textColor = Colors.gray100
         view.font = Typography.heading
+        view.returnKeyType = .done
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -70,6 +72,7 @@ class HomeView: UIView {
         super.init(frame: .zero)
         
         setupUI()
+        setupTextField()
     }
     
     required init?(coder: NSCoder) {
@@ -80,7 +83,7 @@ class HomeView: UIView {
         addSubview(profileBackground)
         profileBackground.addSubview(profileImage)
         profileBackground.addSubview(welcomeLabel)
-        profileBackground.addSubview(nameLabel)
+        profileBackground.addSubview(nameTextField)
         
         addSubview(contentBackground)
         contentBackground.addSubview(feedbackButton)
@@ -93,6 +96,21 @@ class HomeView: UIView {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
         
         profileImage.addGestureRecognizer(tapGesture)
+    }
+    
+    private func setupTextField() {
+        nameTextField.addTarget(
+            self,
+            action: #selector(nameTextFieldDidEndEditing),
+            for: .editingDidEnd
+        )
+        nameTextField.delegate = self
+    }
+    
+    @objc
+    private func nameTextFieldDidEndEditing() {
+        let name = nameTextField.text ?? ""
+        UserDefaultsManager.saveUserName(name: name)
     }
     
     @objc
@@ -115,8 +133,8 @@ class HomeView: UIView {
             welcomeLabel.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: Metrics.small),
             welcomeLabel.leadingAnchor.constraint(equalTo: profileImage.leadingAnchor),
             
-            nameLabel.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: Metrics.little),
-            nameLabel.leadingAnchor.constraint(equalTo: welcomeLabel.leadingAnchor),
+            nameTextField.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: Metrics.little),
+            nameTextField.leadingAnchor.constraint(equalTo: welcomeLabel.leadingAnchor),
             
             contentBackground.trailingAnchor.constraint(equalTo: trailingAnchor),
             contentBackground.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -128,5 +146,14 @@ class HomeView: UIView {
             feedbackButton.trailingAnchor.constraint(equalTo: contentBackground.trailingAnchor, constant: -Metrics.medium),
             feedbackButton.heightAnchor.constraint(equalToConstant: Metrics.buttonSize),
         ])
+    }
+}
+
+extension HomeView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        let name = nameTextField.text ?? ""
+        UserDefaultsManager.saveUserName(name: name)
+        return true
     }
 }
