@@ -59,8 +59,12 @@ class HomeViewController: UIViewController {
     }
     
     private func checkIfExistingData() {
-        if let user = UserDefaultsManager.getUser() {
+        if UserDefaultsManager.getUser() != nil {
             contentView.nameTextField.text = UserDefaultsManager.getUserName()
+        }
+        
+        if let savedImage = UserDefaultsManager.getProfileImage() {
+            contentView.profileImage.image = savedImage
         }
     }
     
@@ -92,8 +96,10 @@ extension HomeViewController: UIImagePickerControllerDelegate, UINavigationContr
     ) {
         if let editedImage = info[.editedImage] as? UIImage {
             contentView.profileImage.image = editedImage
+            UserDefaultsManager.saveUserImageProfile(image: editedImage)
         } else if let originalImage = info[.originalImage] as? UIImage {
             contentView.profileImage.image = originalImage
+            UserDefaultsManager.saveUserImageProfile(image: originalImage)
         }
         
         dismiss(animated: true)
