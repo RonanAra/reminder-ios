@@ -71,6 +71,7 @@ extension ReminderFlowController: HomeFlowDelegate {
     func navigateToReceipes() {
         let viewConstroller = viewControllerFactory.makeNewReceiptsViewController()
         self.navigationController?.pushViewController(viewConstroller, animated: true)
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     func logout() {
