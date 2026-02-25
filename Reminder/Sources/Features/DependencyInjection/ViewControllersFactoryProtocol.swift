@@ -17,4 +17,6 @@ protocol ViewControllersFactoryProtocol: AnyObject {
         flowDelegate: HomeFlowDelegate,
         viewModel: HomeViewModel
     ) -> HomeViewController
+    
+    func makeNewReceiptsViewController() -> NewReceiptViewController
 }
