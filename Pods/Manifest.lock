@@ -46,9 +46,13 @@ PODS:
     - GoogleUtilities/Privacy
   - GTMSessionFetcher/Core (5.0.0)
   - RecaptchaInterop (101.0.0)
+  - SQLite.swift (0.15.5):
+    - SQLite.swift/standard (= 0.15.5)
+  - SQLite.swift/standard (0.15.5)
 
 DEPENDENCIES:
   - Firebase/Auth
+  - SQLite.swift
 
 SPEC REPOS:
   trunk:
@@ -62,6 +66,7 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMSessionFetcher
     - RecaptchaInterop
+    - SQLite.swift
 
 SPEC CHECKSUMS:
   Firebase: 9a58fdbc9d8655ed7b79a19cf9690bb007d3d46d
@@ -74,7 +79,8 @@ SPEC CHECKSUMS:
   GoogleUtilities: 00c88b9a86066ef77f0da2fab05f65d7768ed8e1
   GTMSessionFetcher: 02d6e866e90bc236f48a703a041dfe43e6221a29
   RecaptchaInterop: 11e0b637842dfb48308d242afc3f448062325aba
+  SQLite.swift: c38c92f61436f1a4053029550edb1ef7caa2a2cd
 
-PODFILE CHECKSUM: 499f98bf0cfd33dce5f4b3c0c99affcad6ee2502
+PODFILE CHECKSUM: 2172c46d0322138f280b62308a3aa8e041aa3359
 
 COCOAPODS: 1.16.2
