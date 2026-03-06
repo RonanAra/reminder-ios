@@ -9,9 +9,12 @@ import Foundation
 import UIKit
 
 final class ViewControllersFactory: ViewControllersFactoryProtocol {
-    func makeNewReceiptsViewController() -> NewReceiptViewController {
+    func makeNewReceiptsViewController(viewModel: NewReceiptViewModel) -> NewReceiptViewController {
         let contentView = NewReceiptView()
-        let viewController = NewReceiptViewController(newReceiptView: contentView)
+        let viewController = NewReceiptViewController(
+            newReceiptView: contentView,
+            newReceiptViewModel: viewModel
+        )
         return viewController
     }
     

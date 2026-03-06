@@ -18,5 +18,7 @@ protocol ViewControllersFactoryProtocol: AnyObject {
         viewModel: HomeViewModel
     ) -> HomeViewController
     
-    func makeNewReceiptsViewController() -> NewReceiptViewController
+    func makeNewReceiptsViewController(
+        viewModel: NewReceiptViewModel
+    ) -> NewReceiptViewController
 }

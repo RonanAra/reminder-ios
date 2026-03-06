@@ -69,7 +69,9 @@ extension ReminderFlowController: SplashFlowDelegate {
 //MARK: - Home
 extension ReminderFlowController: HomeFlowDelegate {
     func navigateToReceipes() {
-        let viewConstroller = viewControllerFactory.makeNewReceiptsViewController()
+        let viewConstroller = viewControllerFactory.makeNewReceiptsViewController(
+            viewModel: viewModelFactory.makeNewReceiptViewModel()
+        )
         self.navigationController?.pushViewController(viewConstroller, animated: true)
         self.navigationController?.navigationBar.isHidden = true
     }

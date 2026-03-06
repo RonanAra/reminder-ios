@@ -36,7 +36,7 @@ class NewReceiptView: UIView {
         return label
     }()
     
-    private let addButton: UIButton = {
+    let addButton: UIButton = {
         let button = UIButton()
         button.setTitle("new.receipts.add.button.title".localized, for: .normal)
         button.titleLabel?.font = Typography.subHeading
@@ -47,10 +47,10 @@ class NewReceiptView: UIView {
         return button
     }()
     
-    private let remedyInput = Input(title: "Remédio", placeHolder: "Nome do medicamento")
-    private let timeInput = Input(title: "Horário", placeHolder: "12:00")
-    private let recurrenceInput = Input(title: "Recorrência", placeHolder: "Selecione")
-    private let takeNowCheckbox = Checkbox(title: "Tomar agora")
+    let remedyInput = Input(title: "Remédio", placeHolder: "Nome do medicamento")
+    let timeInput = Input(title: "Horário", placeHolder: "12:00")
+    let recurrenceInput = Input(title: "Recorrência", placeHolder: "Selecione")
+    let takeNowCheckbox = Checkbox(title: "Tomar agora")
     
     override init(frame: CGRect) {
         super.init(frame: frame)

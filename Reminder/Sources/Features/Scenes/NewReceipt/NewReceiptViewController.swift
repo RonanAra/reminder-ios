@@ -10,11 +10,14 @@ import UIKit
 class NewReceiptViewController: UIViewController {
     
     private let newReceiptView: NewReceiptView
+    private let newReceiptViewModel: NewReceiptViewModel
     
     init(
-        newReceiptView: NewReceiptView
+        newReceiptView: NewReceiptView,
+        newReceiptViewModel: NewReceiptViewModel,
     ) {
         self.newReceiptView = newReceiptView
+        self.newReceiptViewModel = newReceiptViewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -36,10 +39,26 @@ class NewReceiptViewController: UIViewController {
     
     private func setupActions() {
         newReceiptView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        newReceiptView.addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
     
     @objc
     private func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc
+    private func addButtonTapped() {
+        let remedy = newReceiptView.remedyInput.getText()
+        let time = newReceiptView.timeInput.getText()
+        let recurrence = newReceiptView.recurrenceInput.getText()
+        let takeNow = false
+        
+        newReceiptViewModel.addReceipt(
+            remedy: remedy,
+            time: time,
+            recurrence: recurrence,
+            takeNow: takeNow
+        )
     }
 }

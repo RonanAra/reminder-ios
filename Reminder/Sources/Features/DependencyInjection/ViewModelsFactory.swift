@@ -6,6 +6,11 @@
 //
 
 final class ViewModelsFactory: ViewModelsFactoryProtocol {
+    func makeNewReceiptViewModel() -> NewReceiptViewModel {
+        let viewModel = NewReceiptViewModel()
+        return viewModel
+    }
+    
     func makeHomeViewModel() -> HomeViewModel {
        let viewModel = HomeViewModel()
        return viewModel
@@ -15,5 +20,4 @@ final class ViewModelsFactory: ViewModelsFactoryProtocol {
         let viewModel = LoginBottomSheetViewModel()
         return viewModel
     }
-    
 }
