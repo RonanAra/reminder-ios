@@ -53,13 +53,28 @@ class NewReceiptView: UIView {
     let recurrenceInput = Input(title: "Recorrência", placeHolder: "Selecione")
     let takeNowCheckbox = Checkbox(title: "Tomar agora")
     
-    let timePicker: UIDatePicker = {
+    private let timePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.datePickerMode = .time
         picker.preferredDatePickerStyle = .wheels
         picker.translatesAutoresizingMaskIntoConstraints = false
         return picker
     }()
+    
+    private let recurrencePicker: UIPickerView = {
+        let picker = UIPickerView()
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        return picker
+    }()
+    
+    private let recurrenceOptions = [
+        "De hora em hora",
+        "2 em 2 horas",
+        "4 em 4 horas",
+        "6 em 6 horas",
+        "8 em 8 horas",
+        "12 em 12 horas",
+    ]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -80,7 +95,27 @@ class NewReceiptView: UIView {
         addSubview(recurrenceInput)
         addSubview(takeNowCheckbox)
         setupTimeInput()
+        setupRecurrenceInput()
         setupConstraints()
+    }
+    
+    private func setupRecurrenceInput() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(
+            barButtonSystemItem: .done,
+            target: self,
+            action: #selector(didSelectRecurrence)
+        )
+        
+        toolbar.setItems([doneButton], animated: true)
+        
+        recurrenceInput.textField.inputView = recurrencePicker
+        recurrenceInput.textField.inputAccessoryView = toolbar
+        
+        recurrencePicker.delegate = self
+        recurrencePicker.dataSource = self
     }
     
     private func setupTimeInput() {
@@ -105,6 +140,14 @@ class NewReceiptView: UIView {
         formatter.timeStyle = .short
         timeInput.textField.text = formatter.string(from: timePicker.date)
         timeInput.textField.resignFirstResponder()
+    }
+    
+    
+    @objc
+    private func didSelectRecurrence() {
+        let selectedOption = recurrencePicker.selectedRow(inComponent: 0)
+        recurrenceInput.textField.text = recurrenceOptions[selectedOption]
+        recurrenceInput.textField.resignFirstResponder()
     }
     
     private func setupConstraints() {
@@ -142,5 +185,19 @@ class NewReceiptView: UIView {
             addButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Metrics.huge),
             addButton.heightAnchor.constraint(equalToConstant: Metrics.buttonSize),
         ])
+    }
+}
+
+extension NewReceiptView: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        recurrenceOptions.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        recurrenceOptions[row]
     }
 }
