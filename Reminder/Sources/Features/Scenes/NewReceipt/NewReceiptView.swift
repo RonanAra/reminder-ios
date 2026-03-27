@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 
 class NewReceiptView: UIView {
     
@@ -52,6 +53,14 @@ class NewReceiptView: UIView {
     let recurrenceInput = Input(title: "Recorrência", placeHolder: "Selecione")
     let takeNowCheckbox = Checkbox(title: "Tomar agora")
     
+    let timePicker: UIDatePicker = {
+        let picker = UIDatePicker()
+        picker.datePickerMode = .time
+        picker.preferredDatePickerStyle = .wheels
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        return picker
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -70,7 +79,32 @@ class NewReceiptView: UIView {
         addSubview(timeInput)
         addSubview(recurrenceInput)
         addSubview(takeNowCheckbox)
+        setupTimeInput()
         setupConstraints()
+    }
+    
+    private func setupTimeInput() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(
+            barButtonSystemItem: .done,
+            target: self,
+            action: #selector(didSelectTime)
+        )
+        
+        toolbar.setItems([doneButton], animated: true)
+        
+        timeInput.textField.inputView = timePicker
+        timeInput.textField.inputAccessoryView = toolbar
+    }
+    
+    @objc
+    private func didSelectTime() {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        timeInput.textField.text = formatter.string(from: timePicker.date)
+        timeInput.textField.resignFirstResponder()
     }
     
     private func setupConstraints() {
