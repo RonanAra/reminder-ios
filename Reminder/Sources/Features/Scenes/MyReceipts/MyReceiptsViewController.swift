@@ -11,7 +11,7 @@ import Foundation
 class MyReceiptsViewController: UIViewController {
     
     let contentView: MyReceiptsView
-    private let flowDelegate: MyReceiptsFlowDelegate
+    public weak var flowDelegate: MyReceiptsFlowDelegate?
     
     init(
         contentView: MyReceiptsView,
@@ -45,6 +45,6 @@ extension MyReceiptsViewController: MyReceiptsViewDelegate {
     }
     
     func didTapAddButton() {
-        flowDelegate.goToNewReceipts()
+        flowDelegate?.goToNewReceipts()
     }
 }
