@@ -10,5 +10,6 @@ import UIKit
 
 protocol HomeFlowDelegate: AnyObject {
     func navigateToReceipes()
+    func navigateToMyReceipts()
     func logout()
 }

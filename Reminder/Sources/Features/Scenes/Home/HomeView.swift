@@ -68,7 +68,7 @@ class HomeView: UIView {
         return button
     }()
     
-    private let myPrescriptionButtons: ButtonHomeView = {
+    let myPrescriptionButtons: ButtonHomeView = {
         let button = ButtonHomeView(
             icon: UIImage(named: "paper"),
             title: "Minhas receitas",

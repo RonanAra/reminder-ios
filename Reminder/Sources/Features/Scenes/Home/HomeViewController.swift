@@ -34,6 +34,7 @@ class HomeViewController: UIViewController {
         setupBindView()
         setupNavigationBar()
         setupActionForNewReceipt()
+        setupActionForMyReceipts()
         checkIfExistingData()
     }
     
@@ -75,6 +76,12 @@ class HomeViewController: UIViewController {
         }
     }
     
+    private func setupActionForMyReceipts() {
+        contentView.myPrescriptionButtons.tapAction = { [weak self] in
+            self?.didTapMyPrescriptionsButton()
+        }
+    }
+    
     @objc
     private func logoutAction() {
         UserDefaultsManager.removeUser()
@@ -89,6 +96,10 @@ extension HomeViewController: HomeViewDelegate {
     
     func didTapNewPrescriptionButton() {
         flowDelegate?.navigateToReceipes()
+    }
+    
+    func didTapMyPrescriptionsButton() {
+        flowDelegate?.navigateToMyReceipts()
     }
 }
 
