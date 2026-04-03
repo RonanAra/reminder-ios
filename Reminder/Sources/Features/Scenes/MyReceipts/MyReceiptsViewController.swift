@@ -11,11 +11,14 @@ import Foundation
 class MyReceiptsViewController: UIViewController {
     
     let contentView: MyReceiptsView
+    private let flowDelegate: MyReceiptsFlowDelegate
     
     init(
-        contentView: MyReceiptsView
+        contentView: MyReceiptsView,
+        flowDelegate: MyReceiptsFlowDelegate
     ) {
         self.contentView = contentView
+        self.flowDelegate = flowDelegate
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -32,6 +35,16 @@ class MyReceiptsViewController: UIViewController {
         view.addSubview(contentView)
         view.backgroundColor = Colors.gray600
         self.setupContentViewToBounds(contentView: contentView)
+        contentView.delegate = self
     }
+}
 
+extension MyReceiptsViewController: MyReceiptsViewDelegate {
+    func didTapBackButton() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func didTapAddButton() {
+        flowDelegate.goToNewReceipts()
+    }
 }

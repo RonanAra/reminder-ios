@@ -22,5 +22,7 @@ protocol ViewControllersFactoryProtocol: AnyObject {
         viewModel: NewReceiptViewModel
     ) -> NewReceiptViewController
     
-    func makeMyReceiptsViewController() -> MyReceiptsViewController
+    func makeMyReceiptsViewController(
+        flowDelegate: MyReceiptsFlowDelegate
+    ) -> MyReceiptsViewController
 }

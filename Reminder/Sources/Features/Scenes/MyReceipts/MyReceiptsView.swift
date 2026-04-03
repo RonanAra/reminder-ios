@@ -31,7 +31,7 @@ class MyReceiptsView: UIView {
         let button = UIButton()
         button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
         button.tintColor = Colors.gray100
-        button.addTarget(MyReceiptsView.self, action: #selector(didTapBackButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -58,7 +58,7 @@ class MyReceiptsView: UIView {
     let addButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "add-button"), for: .normal)
-        button.addTarget(MyReceiptsView.self, action: #selector(didTapAddButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapAddButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -120,7 +120,7 @@ class MyReceiptsView: UIView {
     
     @objc
     private func didTapAddButton() {
-        delegate?.didTapBackButton()
+        delegate?.didTapAddButton()
     }
 }
 
